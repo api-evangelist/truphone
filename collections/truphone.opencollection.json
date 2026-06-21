@@ -1,0 +1,299 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truphone (1GLOBAL) IoT Portal API",
+    "version": "2.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "Token {{apiToken}}",
+      "in": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SIMs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SIM cards.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.2/sims"
+          },
+          "docs": "Retrieve a paginated list of SIM cards / eSIMs with filtering and ordering."
+        },
+        {
+          "info": {
+            "name": "Get a SIM card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.2/sims/:iccid",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ]
+          },
+          "docs": "Get detailed information for a specific SIM card by ICCID."
+        },
+        {
+          "info": {
+            "name": "Update a SIM card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://iot.truphone.com/api/v2.2/sims/:iccid",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a SIM card's label, description, or organization."
+        },
+        {
+          "info": {
+            "name": "Change SIM lifecycle status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://iot.truphone.com/api/v2.0/sims/change_status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change the status of one or more SIM cards (TEST, PROVISIONED, PRE-ACTIVE, ACTIVE, SUSPENDED, RETIRED)."
+        },
+        {
+          "info": {
+            "name": "Activate or suspend data services.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://iot.truphone.com/api/v2.0/sims/change_data_status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate or suspend data services on one or more SIM cards."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connectivity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get SIM status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.2/sims/:iccid/status",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ]
+          },
+          "docs": "Check a SIM card's service status and data / time limits."
+        },
+        {
+          "info": {
+            "name": "List ongoing data sessions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/sims/ongoing_sessions"
+          },
+          "docs": "List active data sessions, including IP and duration information."
+        },
+        {
+          "info": {
+            "name": "List call detail records.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/sims/:iccid/cdr",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ]
+          },
+          "docs": "Retrieve call detail records (CDRs) for a SIM for usage tracking."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List rate plans.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/rate_plans"
+          },
+          "docs": "List the rate plans available to the organization."
+        },
+        {
+          "info": {
+            "name": "Get a rate plan.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/rate_plans/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The rate plan identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve detail for a specific rate plan."
+        },
+        {
+          "info": {
+            "name": "Get SIM subscription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/sims/:iccid/subscription",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ]
+          },
+          "docs": "Retrieve a SIM's subscription details and current service pack."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List devices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.2/devices"
+          },
+          "docs": "List connected devices."
+        },
+        {
+          "info": {
+            "name": "Update a device.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://iot.truphone.com/api/v2.2/devices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The device identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a device's settings."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tags.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/tags"
+          },
+          "docs": "List the organization's SIM tags."
+        },
+        {
+          "info": {
+            "name": "Create a tag.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://iot.truphone.com/api/v2.0/tags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new tag for organizing SIM cards."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

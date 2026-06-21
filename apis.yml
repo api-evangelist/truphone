@@ -1,0 +1,122 @@
+aid: truphone
+url: https://raw.githubusercontent.com/api-evangelist/truphone/refs/heads/main/apis.yml
+name: Truphone (1GLOBAL)
+kind: company
+description: Truphone is a global eSIM, IoT, and enterprise connectivity provider now
+  operating as 1GLOBAL after its 2022 acquisition. It runs its own global mobile
+  network supplemented by roaming across 600+ partner networks in 190+ countries, and
+  exposes REST APIs for SIM/eSIM lifecycle management, data usage and connectivity,
+  rate plans, and IoT device management across its 1GLOBAL IoT Portal, 1GLOBAL Connect,
+  and the 1GLOBAL platform API.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- eSIM
+- IoT
+- Connectivity
+- SIM Management
+- Telecom
+- Mobile Network
+created: '2026-06-21'
+modified: '2026-06-21'
+specificationVersion: '0.19'
+apis:
+- aid: truphone:truphone-sims-esims-api
+  name: Truphone (1GLOBAL) SIMs / eSIMs API
+  tags:
+  - SIM
+  - eSIM
+  - Lifecycle
+  - Provisioning
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.things.1global.com/apireference/
+  baseURL: https://iot.truphone.com/api
+  properties:
+  - url: https://docs.things.1global.com/apireference/
+    type: Documentation
+  - url: https://docs.things.1global.com/apireference/
+    type: APIReference
+  - url: openapi/truphone-openapi.yml
+    type: OpenAPI
+  description: List, retrieve, update, and change the status of SIM cards and eSIMs
+    (TEST, PROVISIONED, PRE-ACTIVE, ACTIVE, SUSPENDED, RETIRED) and activate or suspend
+    data services across the 1GLOBAL IoT Portal. eSIM ordering and activation are
+    also available through 1GLOBAL Connect via POST /connect-api/v2/orders.
+- aid: truphone:truphone-connectivity-usage-api
+  name: Truphone (1GLOBAL) Connectivity / Usage API
+  tags:
+  - Connectivity
+  - Usage
+  - Data Sessions
+  - CDR
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.things.1global.com/apireference/
+  baseURL: https://iot.truphone.com/api
+  properties:
+  - url: https://docs.things.1global.com/apireference/
+    type: Documentation
+  - url: https://docs.things.1global.com/apireference/
+    type: APIReference
+  - url: openapi/truphone-openapi.yml
+    type: OpenAPI
+  description: Inspect ongoing data sessions, retrieve call detail records (CDRs) for
+    usage tracking, check SIM service status with data/time limits, and review location
+    updates for connected SIMs.
+- aid: truphone:truphone-plans-api
+  name: Truphone (1GLOBAL) Plans API
+  tags:
+  - Plans
+  - Rate Plans
+  - Subscriptions
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.things.1global.com/apireference/
+  baseURL: https://iot.truphone.com/api
+  properties:
+  - url: https://docs.things.1global.com/apireference/
+    type: Documentation
+  - url: https://docs.things.1global.com/apireference/
+    type: APIReference
+  - url: openapi/truphone-openapi.yml
+    type: OpenAPI
+  - url: plans/truphone-plans-pricing.yml
+    type: Plans
+  description: List available rate plans, retrieve plan detail, and read or modify a
+    SIM's subscription and current service pack with immediate or next-billing-cycle
+    application.
+- aid: truphone:truphone-device-management-api
+  name: Truphone (1GLOBAL) Device Management API
+  tags:
+  - Devices
+  - Device Management
+  - Rules
+  - Automation
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.things.1global.com/apireference/
+  baseURL: https://iot.truphone.com/api
+  properties:
+  - url: https://docs.things.1global.com/apireference/
+    type: Documentation
+  - url: https://docs.things.1global.com/apireference/
+    type: APIReference
+  - url: openapi/truphone-openapi.yml
+    type: OpenAPI
+  description: List and configure connected devices, manage event-based and usage-based
+    automation rules, and organize fleets with tags and custom attributes across the
+    1GLOBAL IoT Portal.
+common:
+- type: GitHubOrganization
+  url: https://github.com/Truphone
+- type: LinkedIn
+  url: https://www.linkedin.com/company/1global
+- type: Website
+  url: https://www.1global.com
+- type: Documentation
+  url: https://docs.1global.com
+- type: Plans
+  url: plans/truphone-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/truphone-rate-limits.yml
+- type: FinOps
+  url: finops/truphone-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

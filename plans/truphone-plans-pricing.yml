@@ -1,0 +1,124 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Truphone (1GLOBAL)
+providerId: truphone
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- eSIM
+- IoT
+- Connectivity
+- SIM Management
+- Telecom
+- Plans
+description: >-
+  Truphone (now 1GLOBAL) sells global eSIM, IoT, and enterprise connectivity on a
+  sales-led, quote-based model. Enterprise and IoT connectivity plans are not
+  published as transparent self-serve API price lists; rates are negotiated per
+  contract and depend on data volumes, geographies (190+ countries via 600+ partner
+  networks), and product line. 1GLOBAL describes two main enterprise postures:
+  SmartEnterprise (prepaid shared data pool) and Enterprise (postpaid, billed at the
+  end of each contract period). Consumer travel eSIM packages are published (for
+  example around $31 for 6GB / 15 days) but the IoT Portal, Connect, and platform
+  APIs are provisioned under negotiated commercial agreements. Because no public
+  per-unit API pricing is documented, this artifact is not reconciled.
+notes: >-
+  Pricing is sales-led / quote-based; no transparent self-serve API price list is
+  published for the IoT and connectivity APIs. Confirm current rates and packaging
+  with 1GLOBAL sales during reconciliation. Reconciled is false.
+sources:
+- https://www.1global.com/plans-enterprise
+- https://www.1global.com/esim
+- https://docs.things.1global.com/apireference/
+- https://docs.connect.1global.com/apireference/
+plans:
+- id: truphone-smartenterprise
+  name: SmartEnterprise (Prepaid)
+  type: prepaid
+  description: >-
+    Prepaid enterprise connectivity where the organization purchases a shared data
+    pool for its team / fleet. Pricing is quote-based.
+  entries:
+  - label: Shared Data Pool
+    name: shared_data_pool
+    type: usage
+    metric: data
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: eSIM / SIM Connectivity
+  - name: Shared Data Pool
+- id: truphone-enterprise
+  name: Enterprise (Postpaid)
+  type: enterprise
+  description: >-
+    Postpaid enterprise connectivity billed at the end of each contract period
+    based on actual usage. Pricing is negotiated per contract.
+  entries:
+  - label: Postpaid Usage
+    name: postpaid_usage
+    type: usage
+    metric: data
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Mobile Data
+  - name: Voice
+  - name: SMS
+- id: truphone-iot-connectivity
+  name: IoT Connectivity
+  type: enterprise
+  description: >-
+    IoT SIM / eSIM connectivity managed via the 1GLOBAL IoT Portal API, with rate
+    plans assigned per SIM subscription. Rate plan catalog and pricing are
+    provisioned under the customer's commercial agreement.
+  entries:
+  - label: IoT Rate Plan
+    name: iot_rate_plan
+    type: usage
+    metric: data
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: per negotiated rate plan
+    userMultiplied: false
+  elements:
+  - name: SIM / eSIM Lifecycle
+  - name: Data Sessions
+  - name: SMS
+  - name: Rate Plans
+- id: truphone-connect
+  name: 1GLOBAL Connect
+  type: enterprise
+  description: >-
+    Embedded eSIM purchasing and management for travel, airline, and tech partners
+    via the Connect order API. Wholesale / partner pricing is negotiated.
+  entries:
+  - label: Connect Product
+    name: connect_product
+    type: usage
+    metric: orders
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: eSIM Ordering
+  - name: Profile Lifecycle
+  - name: Top-ups
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

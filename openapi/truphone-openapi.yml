@@ -1,0 +1,416 @@
+openapi: 3.0.1
+info:
+  title: Truphone (1GLOBAL) IoT Portal API
+  description: >-
+    REST API for the Truphone (now 1GLOBAL) IoT Portal, providing SIM / eSIM
+    lifecycle management, connectivity and data-usage inspection, rate plans and
+    subscriptions, and IoT device management. The API is JSON-based: request and
+    response bodies use Content-Type application/json, each operation has a URI
+    (for example /api/v2.2/sims) and may reference a specific resource by ICCID
+    or ID. Truphone was acquired and rebranded to 1GLOBAL in 2022; the IoT Portal
+    API host remains iot.truphone.com while product documentation now lives on
+    1global.com. eSIM ordering and activation for 1GLOBAL Connect use a separate
+    host (services.truphone.com/connect-api); see the description on the Order
+    operations below. Endpoints, paths, and the token authentication scheme below
+    are documented; request/response schemas are summarized and not exhaustive.
+  termsOfService: https://www.1global.com
+  contact:
+    name: 1GLOBAL (Truphone) Support
+    url: https://docs.things.1global.com/apireference/
+  version: '2.2'
+servers:
+  - url: https://iot.truphone.com/api
+    description: 1GLOBAL IoT Portal API (legacy Truphone host)
+security:
+  - TokenAuth: []
+tags:
+  - name: SIMs
+    description: SIM / eSIM listing, retrieval, update, and lifecycle status changes.
+  - name: Connectivity
+    description: Data sessions, call detail records, status, and location updates.
+  - name: Plans
+    description: Rate plans and SIM subscriptions.
+  - name: Devices
+    description: Connected device management and automation rules.
+  - name: Organization
+    description: Tags and custom attributes for organizing SIM fleets.
+paths:
+  /v2.2/sims:
+    get:
+      operationId: listSims
+      tags:
+        - SIMs
+      summary: List SIM cards
+      description: >-
+        Retrieve a paginated list of SIM cards / eSIMs with filtering and
+        ordering. Supports page and per_page (max 500) query parameters.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            maximum: 500
+      responses:
+        '200':
+          description: A paginated list of SIM cards.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimList'
+  /v2.2/sims/{iccid}:
+    get:
+      operationId: getSim
+      tags:
+        - SIMs
+      summary: Get a SIM card
+      description: Retrieve detailed information for a specific SIM card by ICCID.
+      parameters:
+        - $ref: '#/components/parameters/Iccid'
+      responses:
+        '200':
+          description: SIM card detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sim'
+    patch:
+      operationId: updateSim
+      tags:
+        - SIMs
+      summary: Update a SIM card
+      description: Update a SIM card's label, description, or organization.
+      parameters:
+        - $ref: '#/components/parameters/Iccid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimUpdate'
+      responses:
+        '200':
+          description: Updated SIM card.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sim'
+  /v2.2/sims/{iccid}/status:
+    get:
+      operationId: getSimStatus
+      tags:
+        - Connectivity
+      summary: Get SIM status
+      description: Check a SIM card's service status and data / time limits.
+      parameters:
+        - $ref: '#/components/parameters/Iccid'
+      responses:
+        '200':
+          description: SIM status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimStatus'
+  /v2.0/sims/change_status:
+    post:
+      operationId: changeSimStatus
+      tags:
+        - SIMs
+      summary: Change SIM lifecycle status
+      description: >-
+        Change the status of one or more SIM cards. Valid states include TEST,
+        PROVISIONED, PRE-ACTIVE, ACTIVE, SUSPENDED, and RETIRED. Use this to
+        activate or suspend SIMs / eSIMs.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeStatusRequest'
+      responses:
+        '200':
+          description: Status change accepted.
+  /v2.0/sims/change_data_status:
+    post:
+      operationId: changeDataStatus
+      tags:
+        - Connectivity
+      summary: Activate or suspend data services
+      description: Activate or suspend data services on one or more SIM cards.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeStatusRequest'
+      responses:
+        '200':
+          description: Data status change accepted.
+  /v2.0/sims/ongoing_sessions:
+    get:
+      operationId: listOngoingSessions
+      tags:
+        - Connectivity
+      summary: List ongoing data sessions
+      description: List active data sessions, including IP and duration information.
+      responses:
+        '200':
+          description: A list of ongoing data sessions.
+  /v2.0/sims/{iccid}/cdr:
+    get:
+      operationId: listCdrs
+      tags:
+        - Connectivity
+      summary: List call detail records
+      description: Retrieve call detail records (CDRs) for a SIM for usage tracking.
+      parameters:
+        - $ref: '#/components/parameters/Iccid'
+      responses:
+        '200':
+          description: A list of call detail records.
+  /v2.0/rate_plans:
+    get:
+      operationId: listRatePlans
+      tags:
+        - Plans
+      summary: List rate plans
+      description: List the rate plans available to the organization.
+      responses:
+        '200':
+          description: A list of rate plans.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatePlanList'
+  /v2.0/rate_plans/{id}:
+    get:
+      operationId: getRatePlan
+      tags:
+        - Plans
+      summary: Get a rate plan
+      description: Retrieve detail for a specific rate plan.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Rate plan detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatePlan'
+  /v2.0/sims/{iccid}/subscription:
+    get:
+      operationId: getSubscription
+      tags:
+        - Plans
+      summary: Get SIM subscription
+      description: Retrieve a SIM's subscription details and current service pack.
+      parameters:
+        - $ref: '#/components/parameters/Iccid'
+      responses:
+        '200':
+          description: Subscription detail.
+    patch:
+      operationId: updateSubscription
+      tags:
+        - Plans
+      summary: Update SIM subscription
+      description: >-
+        Modify a SIM's rate plan, applying the change immediately or at the next
+        billing cycle.
+      parameters:
+        - $ref: '#/components/parameters/Iccid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated subscription.
+  /v2.2/devices:
+    get:
+      operationId: listDevices
+      tags:
+        - Devices
+      summary: List devices
+      description: List connected devices.
+      responses:
+        '200':
+          description: A list of devices.
+  /v2.2/devices/{id}:
+    get:
+      operationId: getDevice
+      tags:
+        - Devices
+      summary: Get a device
+      description: Retrieve a device's configuration.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Device detail.
+    patch:
+      operationId: updateDevice
+      tags:
+        - Devices
+      summary: Update a device
+      description: Update a device's settings.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated device.
+  /v2.0/tags:
+    get:
+      operationId: listTags
+      tags:
+        - Organization
+      summary: List tags
+      description: List the organization's SIM tags.
+      responses:
+        '200':
+          description: A list of tags.
+    post:
+      operationId: createTag
+      tags:
+        - Organization
+      summary: Create a tag
+      description: Create a new tag for organizing SIM cards.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Tag created.
+components:
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        Token-based authentication. Supply the header
+        `Authorization: Token <api-key>`. (1GLOBAL Connect and the 1GLOBAL
+        platform API on services.truphone.com use OAuth2 / bearer tokens
+        instead; see provider documentation.)
+  parameters:
+    Iccid:
+      name: iccid
+      in: path
+      required: true
+      description: The ICCID identifying the SIM / eSIM.
+      schema:
+        type: string
+  schemas:
+    Sim:
+      type: object
+      description: A SIM card / eSIM resource.
+      properties:
+        iccid:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+            - TEST
+            - PROVISIONED
+            - PRE-ACTIVE
+            - ACTIVE
+            - SUSPENDED
+            - RETIRED
+        organization:
+          type: string
+    SimUpdate:
+      type: object
+      properties:
+        label:
+          type: string
+        description:
+          type: string
+        organization:
+          type: string
+    SimList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sim'
+        page:
+          type: integer
+        per_page:
+          type: integer
+    SimStatus:
+      type: object
+      properties:
+        iccid:
+          type: string
+        service_status:
+          type: string
+        data_limit:
+          type: string
+        time_limit:
+          type: string
+    ChangeStatusRequest:
+      type: object
+      description: Request to change the status of one or more SIM cards.
+      properties:
+        sims:
+          type: array
+          items:
+            type: string
+          description: List of ICCIDs to act on.
+        status:
+          type: string
+          enum:
+            - TEST
+            - PROVISIONED
+            - PRE-ACTIVE
+            - ACTIVE
+            - SUSPENDED
+            - RETIRED
+    RatePlan:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+    RatePlanList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RatePlan'

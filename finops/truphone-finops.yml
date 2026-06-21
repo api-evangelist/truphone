@@ -1,0 +1,110 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Truphone (1GLOBAL)
+providerId: truphone
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- eSIM
+- IoT
+- Connectivity
+- SIM Management
+- Telecom
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Truphone (1GLOBAL) connectivity spend. Costs are driven primarily
+  by mobile data consumption, plus SMS and voice where enabled, billed against
+  per-SIM rate plans under a negotiated, sales-led commercial agreement (prepaid
+  SmartEnterprise shared pools or postpaid Enterprise billing). Usage is observable
+  through the IoT Portal API via call detail records (CDRs), ongoing data sessions,
+  per-SIM status with data / time limits, and account usage / billing reports.
+  Because per-unit pricing is quote-based and not publicly published, the monetary
+  rates here are not reconciled.
+notes: >-
+  Pricing is sales-led; verify per-rate-plan rates, currency, and billing frequency
+  with 1GLOBAL during reconciliation. Meters reflect documented usage dimensions
+  (data, SMS, voice, CDRs) exposed by the IoT Portal API. Reconciled is false.
+sources:
+- https://www.1global.com/plans-enterprise
+- https://docs.things.1global.com/apireference/
+- https://docs.1global.com/api/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: 1GLOBAL
+serviceCategory: IoT and Connectivity
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: 1GLOBAL IoT Connectivity
+  ServiceCategory: IoT and Connectivity
+  ProviderName: Truphone (1GLOBAL)
+  PublisherName: 1GLOBAL
+  InvoiceIssuerName: 1GLOBAL
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: data_volume
+  description: Mobile data consumed by SIMs / eSIMs, observable via CDRs and data sessions.
+  unit: bytes
+  aggregation: sum
+  dimensions:
+  - account
+  - sim
+  - rate_plan
+- name: sms_messages
+  description: SMS messages sent / received where SMS service is enabled on a SIM.
+  unit: messages
+  aggregation: sum
+  dimensions:
+  - account
+  - sim
+- name: voice_minutes
+  description: Voice minutes where voice service is enabled on a rate plan.
+  unit: minutes
+  aggregation: sum
+  dimensions:
+  - account
+  - sim
+- name: active_sims
+  description: Count of SIMs / eSIMs in ACTIVE status, a driver of subscription charges.
+  unit: sims
+  aggregation: max
+  dimensions:
+  - account
+  - rate_plan
+principles:
+- name: Visibility
+  description: >-
+    Pull CDRs, ongoing data sessions, and account usage / billing reports from the
+    IoT Portal API to inspect per-SIM data, SMS, and voice consumption.
+- name: Allocation
+  description: >-
+    Use tags, custom attributes, and sub-organizations to map SIM fleets to teams,
+    products, and cost centers.
+- name: Optimization
+  description: >-
+    Set usage-based automation rules and top-up / spending limits to suspend or
+    throttle SIMs before overage; right-size rate plans per device profile.
+- name: Accountability
+  description: >-
+    Assign owners per sub-organization; review monthly data spend against negotiated
+    pool / postpaid commitments.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

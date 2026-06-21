@@ -1,0 +1,300 @@
+{
+  "info": {
+    "name": "Truphone (1GLOBAL) IoT Portal API",
+    "description": "REST API for the Truphone (now 1GLOBAL) IoT Portal: SIM / eSIM lifecycle, connectivity / usage, rate plans, and device management. Token header authentication (Authorization: Token <api-key>). Base URL https://iot.truphone.com/api. Truphone rebranded to 1GLOBAL in 2022; this host retains the legacy truphone.com namespace.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Authorization", "type": "string" },
+      { "key": "value", "value": "Token {{apiToken}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://iot.truphone.com/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "SIMs",
+      "item": [
+        {
+          "name": "List SIM cards",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2.2/sims",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.2", "sims"]
+            },
+            "description": "Retrieve a paginated list of SIM cards / eSIMs with filtering and ordering."
+          }
+        },
+        {
+          "name": "Get a SIM card",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2.2/sims/:iccid",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.2", "sims", ":iccid"],
+              "variable": [
+                { "key": "iccid", "value": "", "description": "The ICCID identifying the SIM / eSIM." }
+              ]
+            },
+            "description": "Get detailed information for a specific SIM card by ICCID."
+          }
+        },
+        {
+          "name": "Update a SIM card",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"\",\n  \"description\": \"\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v2.2/sims/:iccid",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.2", "sims", ":iccid"],
+              "variable": [
+                { "key": "iccid", "value": "", "description": "The ICCID identifying the SIM / eSIM." }
+              ]
+            },
+            "description": "Update a SIM card's label, description, or organization."
+          }
+        },
+        {
+          "name": "Change SIM lifecycle status",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sims\": [],\n  \"status\": \"ACTIVE\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v2.0/sims/change_status",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.0", "sims", "change_status"]
+            },
+            "description": "Change the status of one or more SIM cards (TEST, PROVISIONED, PRE-ACTIVE, ACTIVE, SUSPENDED, RETIRED)."
+          }
+        },
+        {
+          "name": "Activate or suspend data services",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sims\": [],\n  \"status\": \"ACTIVE\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v2.0/sims/change_data_status",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.0", "sims", "change_data_status"]
+            },
+            "description": "Activate or suspend data services on one or more SIM cards."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Connectivity",
+      "item": [
+        {
+          "name": "Get SIM status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2.2/sims/:iccid/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.2", "sims", ":iccid", "status"],
+              "variable": [
+                { "key": "iccid", "value": "", "description": "The ICCID identifying the SIM / eSIM." }
+              ]
+            },
+            "description": "Check a SIM card's service status and data / time limits."
+          }
+        },
+        {
+          "name": "List ongoing data sessions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2.0/sims/ongoing_sessions",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.0", "sims", "ongoing_sessions"]
+            },
+            "description": "List active data sessions, including IP and duration information."
+          }
+        },
+        {
+          "name": "List call detail records",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2.0/sims/:iccid/cdr",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.0", "sims", ":iccid", "cdr"],
+              "variable": [
+                { "key": "iccid", "value": "", "description": "The ICCID identifying the SIM / eSIM." }
+              ]
+            },
+            "description": "Retrieve call detail records (CDRs) for a SIM for usage tracking."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Plans",
+      "item": [
+        {
+          "name": "List rate plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2.0/rate_plans",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.0", "rate_plans"]
+            },
+            "description": "List the rate plans available to the organization."
+          }
+        },
+        {
+          "name": "Get a rate plan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2.0/rate_plans/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.0", "rate_plans", ":id"],
+              "variable": [
+                { "key": "id", "value": "", "description": "The rate plan identifier." }
+              ]
+            },
+            "description": "Retrieve detail for a specific rate plan."
+          }
+        },
+        {
+          "name": "Get SIM subscription",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2.0/sims/:iccid/subscription",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.0", "sims", ":iccid", "subscription"],
+              "variable": [
+                { "key": "iccid", "value": "", "description": "The ICCID identifying the SIM / eSIM." }
+              ]
+            },
+            "description": "Retrieve a SIM's subscription details and current service pack."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Devices",
+      "item": [
+        {
+          "name": "List devices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2.2/devices",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.2", "devices"]
+            },
+            "description": "List connected devices."
+          }
+        },
+        {
+          "name": "Update a device",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v2.2/devices/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.2", "devices", ":id"],
+              "variable": [
+                { "key": "id", "value": "", "description": "The device identifier." }
+              ]
+            },
+            "description": "Update a device's settings."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Organization",
+      "item": [
+        {
+          "name": "List tags",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2.0/tags",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.0", "tags"]
+            },
+            "description": "List the organization's SIM tags."
+          }
+        },
+        {
+          "name": "Create a tag",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v2.0/tags",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2.0", "tags"]
+            },
+            "description": "Create a new tag for organizing SIM cards."
+          }
+        }
+      ]
+    }
+  ]
+}

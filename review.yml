@@ -1,0 +1,122 @@
+aid: truphone
+name: Truphone (1GLOBAL)
+review:
+  question: >-
+    Does Truphone (now 1GLOBAL) expose a real, documented public REST API for
+    IoT / eSIM connectivity, and what is the state of the Truphone to 1GLOBAL
+    rebrand across its API surface?
+  answer: true
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  rebrandNote: |
+    Truphone was acquired and rebranded to 1GLOBAL in 2022. Product marketing and
+    documentation now live on 1global.com, but the API surface is split across
+    legacy and new namespaces: the IoT Portal API is hosted at iot.truphone.com,
+    1GLOBAL Connect and the 1GLOBAL platform API are hosted at
+    services.truphone.com, and the public code / docs repositories remain under
+    github.com/Truphone (e.g. connect-api-docs, LPAdesktop). Documentation portals
+    use the new docs.things.1global.com, docs.connect.1global.com, and
+    docs.1global.com hosts. This catalog uses the slug `truphone` and the display
+    name "Truphone (1GLOBAL)" to reflect both the legacy hosts and the current
+    brand.
+findings:
+  summary: |
+    Yes. Truphone / 1GLOBAL publishes multiple real, documented REST APIs for
+    eSIM and IoT connectivity. Three distinct but related products were confirmed:
+
+      1. 1GLOBAL IoT Portal API (host iot.truphone.com/api) - the most fully
+         documented surface, covering SIM / eSIM listing and lifecycle status
+         changes (TEST, PROVISIONED, PRE-ACTIVE, ACTIVE, SUSPENDED, RETIRED), data
+         activation / suspension, data sessions, CDRs, rate plans, subscriptions,
+         devices, automation rules, tags, attributes, and sub-organizations. It is
+         JSON-based and uses Token header authentication.
+
+      2. 1GLOBAL Connect API (host services.truphone.com/connect-api/v2) - eSIM
+         ordering and lifecycle for embedded / partner use, e.g.
+         POST /connect-api/v2/orders to place an activation order and
+         GET /connect-api/v2/orders/{order_id} to poll status, plus
+         GET /v2/sims/{iccid} for profile state. Uses bearer token auth.
+
+      3. 1GLOBAL platform API (host services.truphone.com, docs.1global.com/api)
+         - OAuth2-secured CRM / billing resources such as /crm/accounts,
+         /crm/products, /crm/persons, /billing/cost/usage/items, and /calls.
+
+    All three are HTTPS REST / JSON. No public WebSocket surface is documented.
+    The OpenAPI in this repo models the IoT Portal API (the richest documented
+    surface); Connect and platform endpoints are described in prose where
+    relevant. Pricing is sales-led / quote-based with no transparent self-serve
+    per-unit API price list, so Plans, Rate Limits, and FinOps artifacts are
+    marked reconciled: false.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://iot.truphone.com/api
+      documented: true
+      note: 1GLOBAL IoT Portal API; Token header auth; JSON.
+    - protocol: REST
+      scheme: https
+      baseURL: https://services.truphone.com/connect-api
+      documented: true
+      note: 1GLOBAL Connect API (eSIM ordering / lifecycle); bearer token auth.
+    - protocol: REST
+      scheme: https
+      baseURL: https://services.truphone.com
+      documented: true
+      note: 1GLOBAL platform API (CRM / billing); OAuth2.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket / realtime streaming API is documented across IoT Portal, Connect, or platform docs.
+  endpointsConfirmedRest:
+    - GET    https://iot.truphone.com/api/v2.2/sims
+    - GET    https://iot.truphone.com/api/v2.2/sims/{iccid}
+    - PATCH  https://iot.truphone.com/api/v2.2/sims/{iccid}
+    - GET    https://iot.truphone.com/api/v2.2/sims/{iccid}/status
+    - POST   https://iot.truphone.com/api/v2.0/sims/change_status
+    - POST   https://iot.truphone.com/api/v2.0/sims/change_data_status
+    - GET    https://iot.truphone.com/api/v2.0/sims/ongoing_sessions
+    - GET    https://iot.truphone.com/api/v2.0/sims/{iccid}/cdr
+    - GET    https://iot.truphone.com/api/v2.0/rate_plans
+    - GET    https://iot.truphone.com/api/v2.0/rate_plans/{id}
+    - GET    https://iot.truphone.com/api/v2.0/sims/{iccid}/subscription
+    - PATCH  https://iot.truphone.com/api/v2.2/sims/{iccid}/subscription
+    - GET    https://iot.truphone.com/api/v2.2/devices
+    - PATCH  https://iot.truphone.com/api/v2.2/devices/{id}
+    - GET    https://iot.truphone.com/api/v2.0/tags
+    - POST   https://iot.truphone.com/api/v2.0/tags
+    - POST   https://services.truphone.com/connect-api/v2/orders
+    - GET    https://services.truphone.com/connect-api/v2/orders/{order_id}
+    - GET    https://services.truphone.com/connect-api/v2/sims/{iccid}
+    - GET    https://services.truphone.com/crm/accounts/accounts
+    - GET    https://services.truphone.com/crm/products/products
+    - GET    https://services.truphone.com/billing/cost/usage/items
+sources:
+  - url: https://docs.things.1global.com/apireference/
+    type: APIReference
+    note: 1GLOBAL IoT Portal API reference; SIMs, status, CDRs, rate plans, devices, rules. Token header auth.
+  - url: https://docs.connect.1global.com/apireference/
+    type: APIReference
+    note: 1GLOBAL Connect API reference; eSIM ordering and lifecycle (v3 noted in changelog).
+  - url: https://docs.connect.1global.com/docs/recipes/new-esim/
+    type: Documentation
+    note: Confirms POST /connect-api/v2/orders and GET /connect-api/v2/orders/{order_id} on services.truphone.com.
+  - url: https://docs.1global.com/api/
+    type: Documentation
+    note: 1GLOBAL platform API; OAuth2; CRM accounts / products / persons, billing usage, calls.
+  - url: https://github.com/Truphone
+    type: GitHubOrganization
+    note: Legacy Truphone GitHub org (now 1GLOBAL); hosts connect-api-docs and LPAdesktop.
+  - url: https://www.1global.com/plans-enterprise
+    type: Pricing
+    note: Enterprise plans are sales-led / quote-based; SmartEnterprise (prepaid) and Enterprise (postpaid).
+actions:
+  openapiPath: openapi/truphone-openapi.yml
+  apisYmlCreated: true
+  reason: |
+    Created an OpenAPI 3.0.1 document modeling the documented 1GLOBAL IoT Portal
+    REST surface (real paths, Token auth, summarized schemas) plus four apis.yml
+    API entries (SIMs / eSIMs, Connectivity / Usage, Plans, Device Management).
+    Plans, Rate Limits, and FinOps artifacts are reconciled: false because
+    per-unit pricing is sales-led and not publicly published. The Truphone to
+    1GLOBAL rebrand is documented explicitly across README, apis.yml, OpenAPI
+    description, and this review.

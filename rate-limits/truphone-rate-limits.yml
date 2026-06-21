@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Truphone (1GLOBAL)
+providerId: truphone
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- eSIM
+- IoT
+- Connectivity
+- SIM Management
+- Telecom
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Truphone (1GLOBAL) IoT Portal API documents rate limiting via standard
+  response headers (X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset)
+  on its REST endpoints, and supports idempotent POST requests through an
+  Idempotency-Key header (24-hour expiry). Specific numeric per-account or
+  per-endpoint limits are not published in the public API reference and are not
+  reconciled in this artifact. List endpoints are paginated with page and per_page
+  (max 500) parameters, which bounds response size.
+notes: >-
+  Confirm concrete numeric rate limits with 1GLOBAL during reconciliation; only the
+  presence of rate-limit headers, pagination caps, and idempotency support is
+  documented publicly. Reconciled is false.
+sources:
+- https://docs.things.1global.com/apireference/
+- https://docs.connect.1global.com/apireference/
+responseCodes:
+  throttled: 429
+limits:
+- name: Per-Account Request Rate
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: >-
+    Enforced and surfaced via X-RateLimit-Limit / X-RateLimit-Remaining /
+    X-RateLimit-Reset response headers; numeric value not published.
+- name: Pagination Page Size
+  scope: request
+  metric: records
+  limit: 500
+  notes: List endpoints accept page and per_page, with per_page capped at 500.
+policies:
+- name: Rate Limit Headers
+  description: >-
+    Responses include X-RateLimit-Limit, X-RateLimit-Remaining, and
+    X-RateLimit-Reset so clients can self-throttle.
+- name: Idempotency
+  description: >-
+    POST endpoints accept an Idempotency-Key header (24-hour expiry) to safely
+    retry create / change operations without duplication.
+- name: Backoff Strategy
+  description: >-
+    Clients should implement exponential backoff with jitter on HTTP 429 and honor
+    rate-limit reset headers.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
