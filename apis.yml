@@ -103,6 +103,10 @@ apis:
     automation rules, and organize fleets with tags and custom attributes across the
     1GLOBAL IoT Portal.
 common:
+- type: DomainSecurity
+  url: security/truphone-domain-security.yml
+- type: Authentication
+  url: authentication/truphone-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/Truphone
 - type: LinkedIn

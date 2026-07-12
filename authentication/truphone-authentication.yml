@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/truphone-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: TokenAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Token-based authentication. Supply the header `Authorization: Token <api-key>`.
+    (1GLOBAL Connect and the 1GLOBAL platform API on services.truphone.com use OAuth2 / bearer
+    tokens instead; see provider documentation.)'
+  sources:
+  - openapi/truphone-openapi.yml
