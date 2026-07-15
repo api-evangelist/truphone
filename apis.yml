@@ -103,6 +103,8 @@ apis:
     automation rules, and organize fleets with tags and custom attributes across the
     1GLOBAL IoT Portal.
 common:
+- type: AgenticAccess
+  url: agentic-access/truphone-agentic-access.yml
 - type: DomainSecurity
   url: security/truphone-domain-security.yml
 - type: Authentication
