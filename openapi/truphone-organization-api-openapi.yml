@@ -1,0 +1,50 @@
+openapi: 3.0.1
+info:
+  title: Truphone (1GLOBAL) IoT Portal Connectivity Organization API
+  description: 'REST API for the Truphone (now 1GLOBAL) IoT Portal, providing SIM / eSIM lifecycle management, connectivity and data-usage inspection, rate plans and subscriptions, and IoT device management. The API is JSON-based: request and response bodies use Content-Type application/json, each operation has a URI (for example /api/v2.2/sims) and may reference a specific resource by ICCID or ID. Truphone was acquired and rebranded to 1GLOBAL in 2022; the IoT Portal API host remains iot.truphone.com while product documentation now lives on 1global.com. eSIM ordering and activation for 1GLOBAL Connect use a separate host (services.truphone.com/connect-api); see the description on the Order operations below. Endpoints, paths, and the token authentication scheme below are documented; request/response schemas are summarized and not exhaustive.'
+  termsOfService: https://www.1global.com
+  contact:
+    name: 1GLOBAL (Truphone) Support
+    url: https://docs.things.1global.com/apireference/
+  version: '2.2'
+servers:
+- url: https://iot.truphone.com/api
+  description: 1GLOBAL IoT Portal API (legacy Truphone host)
+security:
+- TokenAuth: []
+tags:
+- name: Organization
+  description: Tags and custom attributes for organizing SIM fleets.
+paths:
+  /v2.0/tags:
+    get:
+      operationId: listTags
+      tags:
+      - Organization
+      summary: List tags
+      description: List the organization's SIM tags.
+      responses:
+        '200':
+          description: A list of tags.
+    post:
+      operationId: createTag
+      tags:
+      - Organization
+      summary: Create a tag
+      description: Create a new tag for organizing SIM cards.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Tag created.
+components:
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token-based authentication. Supply the header `Authorization: Token <api-key>`. (1GLOBAL Connect and the 1GLOBAL platform API on services.truphone.com use OAuth2 / bearer tokens instead; see provider documentation.)'

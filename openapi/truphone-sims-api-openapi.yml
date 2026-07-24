@@ -1,0 +1,170 @@
+openapi: 3.0.1
+info:
+  title: Truphone (1GLOBAL) IoT Portal Connectivity SIMs API
+  description: 'REST API for the Truphone (now 1GLOBAL) IoT Portal, providing SIM / eSIM lifecycle management, connectivity and data-usage inspection, rate plans and subscriptions, and IoT device management. The API is JSON-based: request and response bodies use Content-Type application/json, each operation has a URI (for example /api/v2.2/sims) and may reference a specific resource by ICCID or ID. Truphone was acquired and rebranded to 1GLOBAL in 2022; the IoT Portal API host remains iot.truphone.com while product documentation now lives on 1global.com. eSIM ordering and activation for 1GLOBAL Connect use a separate host (services.truphone.com/connect-api); see the description on the Order operations below. Endpoints, paths, and the token authentication scheme below are documented; request/response schemas are summarized and not exhaustive.'
+  termsOfService: https://www.1global.com
+  contact:
+    name: 1GLOBAL (Truphone) Support
+    url: https://docs.things.1global.com/apireference/
+  version: '2.2'
+servers:
+- url: https://iot.truphone.com/api
+  description: 1GLOBAL IoT Portal API (legacy Truphone host)
+security:
+- TokenAuth: []
+tags:
+- name: SIMs
+  description: SIM / eSIM listing, retrieval, update, and lifecycle status changes.
+paths:
+  /v2.2/sims:
+    get:
+      operationId: listSims
+      tags:
+      - SIMs
+      summary: List SIM cards
+      description: Retrieve a paginated list of SIM cards / eSIMs with filtering and ordering. Supports page and per_page (max 500) query parameters.
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          maximum: 500
+      responses:
+        '200':
+          description: A paginated list of SIM cards.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimList'
+  /v2.2/sims/{iccid}:
+    get:
+      operationId: getSim
+      tags:
+      - SIMs
+      summary: Get a SIM card
+      description: Retrieve detailed information for a specific SIM card by ICCID.
+      parameters:
+      - $ref: '#/components/parameters/Iccid'
+      responses:
+        '200':
+          description: SIM card detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sim'
+    patch:
+      operationId: updateSim
+      tags:
+      - SIMs
+      summary: Update a SIM card
+      description: Update a SIM card's label, description, or organization.
+      parameters:
+      - $ref: '#/components/parameters/Iccid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimUpdate'
+      responses:
+        '200':
+          description: Updated SIM card.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sim'
+  /v2.0/sims/change_status:
+    post:
+      operationId: changeSimStatus
+      tags:
+      - SIMs
+      summary: Change SIM lifecycle status
+      description: Change the status of one or more SIM cards. Valid states include TEST, PROVISIONED, PRE-ACTIVE, ACTIVE, SUSPENDED, and RETIRED. Use this to activate or suspend SIMs / eSIMs.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeStatusRequest'
+      responses:
+        '200':
+          description: Status change accepted.
+components:
+  schemas:
+    SimUpdate:
+      type: object
+      properties:
+        label:
+          type: string
+        description:
+          type: string
+        organization:
+          type: string
+    SimList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sim'
+        page:
+          type: integer
+        per_page:
+          type: integer
+    ChangeStatusRequest:
+      type: object
+      description: Request to change the status of one or more SIM cards.
+      properties:
+        sims:
+          type: array
+          items:
+            type: string
+          description: List of ICCIDs to act on.
+        status:
+          type: string
+          enum:
+          - TEST
+          - PROVISIONED
+          - PRE-ACTIVE
+          - ACTIVE
+          - SUSPENDED
+          - RETIRED
+    Sim:
+      type: object
+      description: A SIM card / eSIM resource.
+      properties:
+        iccid:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - TEST
+          - PROVISIONED
+          - PRE-ACTIVE
+          - ACTIVE
+          - SUSPENDED
+          - RETIRED
+        organization:
+          type: string
+  parameters:
+    Iccid:
+      name: iccid
+      in: path
+      required: true
+      description: The ICCID identifying the SIM / eSIM.
+      schema:
+        type: string
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token-based authentication. Supply the header `Authorization: Token <api-key>`. (1GLOBAL Connect and the 1GLOBAL platform API on services.truphone.com use OAuth2 / bearer tokens instead; see provider documentation.)'
