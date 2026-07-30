@@ -8,7 +8,20 @@ description: Truphone is a global eSIM, IoT, and enterprise connectivity provide
   exposes REST APIs for SIM/eSIM lifecycle management, data usage and connectivity,
   rate plans, and IoT device management across its 1GLOBAL IoT Portal, 1GLOBAL Connect,
   and the 1GLOBAL platform API.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/truphone.png
 tags:
 - eSIM
 - IoT
@@ -20,88 +33,86 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: truphone:truphone-sims-esims-api
-  name: Truphone (1GLOBAL) SIMs / eSIMs API
-  tags:
-  - SIM
-  - eSIM
-  - Lifecycle
-  - Provisioning
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: truphone:truphone-connectivity-api
+  name: Truphone (1GLOBAL) Connectivity API
+  description: Data sessions, call detail records, status, and location updates.
   humanURL: https://docs.things.1global.com/apireference/
   baseURL: https://iot.truphone.com/api
-  properties:
-  - url: https://docs.things.1global.com/apireference/
-    type: Documentation
-  - url: https://docs.things.1global.com/apireference/
-    type: APIReference
-  - url: openapi/truphone-openapi.yml
-    type: OpenAPI
-  description: List, retrieve, update, and change the status of SIM cards and eSIMs
-    (TEST, PROVISIONED, PRE-ACTIVE, ACTIVE, SUSPENDED, RETIRED) and activate or suspend
-    data services across the 1GLOBAL IoT Portal. eSIM ordering and activation are
-    also available through 1GLOBAL Connect via POST /connect-api/v2/orders.
-- aid: truphone:truphone-connectivity-usage-api
-  name: Truphone (1GLOBAL) Connectivity / Usage API
   tags:
   - Connectivity
-  - Usage
-  - Data Sessions
-  - CDR
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/truphone-connectivity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.things.1global.com/apireference/
+  - type: APIReference
+    url: https://docs.things.1global.com/apireference/
+  - type: Plans
+    url: plans/truphone-plans-pricing.yml
+- aid: truphone:truphone-devices-api
+  name: Truphone (1GLOBAL) Devices API
+  description: Connected device management and automation rules.
   humanURL: https://docs.things.1global.com/apireference/
   baseURL: https://iot.truphone.com/api
-  properties:
-  - url: https://docs.things.1global.com/apireference/
-    type: Documentation
-  - url: https://docs.things.1global.com/apireference/
-    type: APIReference
-  - url: openapi/truphone-openapi.yml
-    type: OpenAPI
-  description: Inspect ongoing data sessions, retrieve call detail records (CDRs) for
-    usage tracking, check SIM service status with data/time limits, and review location
-    updates for connected SIMs.
-- aid: truphone:truphone-plans-api
-  name: Truphone (1GLOBAL) Plans API
-  tags:
-  - Plans
-  - Rate Plans
-  - Subscriptions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.things.1global.com/apireference/
-  baseURL: https://iot.truphone.com/api
-  properties:
-  - url: https://docs.things.1global.com/apireference/
-    type: Documentation
-  - url: https://docs.things.1global.com/apireference/
-    type: APIReference
-  - url: openapi/truphone-openapi.yml
-    type: OpenAPI
-  - url: plans/truphone-plans-pricing.yml
-    type: Plans
-  description: List available rate plans, retrieve plan detail, and read or modify a
-    SIM's subscription and current service pack with immediate or next-billing-cycle
-    application.
-- aid: truphone:truphone-device-management-api
-  name: Truphone (1GLOBAL) Device Management API
   tags:
   - Devices
-  - Device Management
-  - Rules
-  - Automation
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/truphone-devices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.things.1global.com/apireference/
+  - type: APIReference
+    url: https://docs.things.1global.com/apireference/
+  - type: Plans
+    url: plans/truphone-plans-pricing.yml
+- aid: truphone:truphone-organization-api
+  name: Truphone (1GLOBAL) Organization API
+  description: Tags and custom attributes for organizing SIM fleets.
   humanURL: https://docs.things.1global.com/apireference/
   baseURL: https://iot.truphone.com/api
+  tags:
+  - Organization
   properties:
-  - url: https://docs.things.1global.com/apireference/
-    type: Documentation
-  - url: https://docs.things.1global.com/apireference/
-    type: APIReference
-  - url: openapi/truphone-openapi.yml
-    type: OpenAPI
-  description: List and configure connected devices, manage event-based and usage-based
-    automation rules, and organize fleets with tags and custom attributes across the
-    1GLOBAL IoT Portal.
+  - type: OpenAPI
+    url: openapi/truphone-organization-api-openapi.yml
+  - type: Documentation
+    url: https://docs.things.1global.com/apireference/
+  - type: APIReference
+    url: https://docs.things.1global.com/apireference/
+  - type: Plans
+    url: plans/truphone-plans-pricing.yml
+- aid: truphone:truphone-plans-api
+  name: Truphone (1GLOBAL) Plans API
+  description: Rate plans and SIM subscriptions.
+  humanURL: https://docs.things.1global.com/apireference/
+  baseURL: https://iot.truphone.com/api
+  tags:
+  - Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/truphone-plans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.things.1global.com/apireference/
+  - type: APIReference
+    url: https://docs.things.1global.com/apireference/
+  - type: Plans
+    url: plans/truphone-plans-pricing.yml
+- aid: truphone:truphone-sims-api
+  name: Truphone (1GLOBAL) SIMs API
+  description: SIM / eSIM listing, retrieval, update, and lifecycle status changes.
+  humanURL: https://docs.things.1global.com/apireference/
+  baseURL: https://iot.truphone.com/api
+  tags:
+  - SIMs
+  properties:
+  - type: OpenAPI
+    url: openapi/truphone-sims-api-openapi.yml
+  - type: Documentation
+    url: https://docs.things.1global.com/apireference/
+  - type: APIReference
+    url: https://docs.things.1global.com/apireference/
+  - type: Plans
+    url: plans/truphone-plans-pricing.yml
 common:
 - type: AgenticAccess
   url: agentic-access/truphone-agentic-access.yml
