@@ -1,0 +1,22 @@
+{
+  "provider": "truphone",
+  "sources": [
+    "truphone-connectivity-api-openapi.yml",
+    "truphone-devices-api-openapi.yml",
+    "truphone-organization-api-openapi.yml",
+    "truphone-plans-api-openapi.yml",
+    "truphone-sims-api-openapi.yml"
+  ],
+  "outputs": [
+    "truphone-connectivity-api-openapi.yml",
+    "truphone-devices-api-openapi.yml",
+    "truphone-organization-api-openapi.yml",
+    "truphone-plans-api-openapi.yml",
+    "truphone-sims-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
