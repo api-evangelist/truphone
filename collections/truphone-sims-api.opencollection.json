@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truphone (1GLOBAL) IoT Portal Connectivity SIMs API",
+    "version": "2.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SIMs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SIM cards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.2/sims",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of SIM cards / eSIMs with filtering and ordering. Supports page and per_page (max 500) query parameters."
+        },
+        {
+          "info": {
+            "name": "Get a SIM card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.2/sims/:iccid",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information for a specific SIM card by ICCID."
+        },
+        {
+          "info": {
+            "name": "Update a SIM card",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://iot.truphone.com/api/v2.2/sims/:iccid",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a SIM card's label, description, or organization."
+        },
+        {
+          "info": {
+            "name": "Change SIM lifecycle status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://iot.truphone.com/api/v2.0/sims/change_status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change the status of one or more SIM cards. Valid states include TEST, PROVISIONED, PRE-ACTIVE, ACTIVE, SUSPENDED, and RETIRED. Use this to activate or suspend SIMs / eSIMs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

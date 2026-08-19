@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truphone (1GLOBAL) IoT Portal Connectivity Plans API",
+    "version": "2.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List rate plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/rate_plans"
+          },
+          "docs": "List the rate plans available to the organization."
+        },
+        {
+          "info": {
+            "name": "Get a rate plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/rate_plans/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve detail for a specific rate plan."
+        },
+        {
+          "info": {
+            "name": "Get SIM subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/sims/:iccid/subscription",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ]
+          },
+          "docs": "Retrieve a SIM's subscription details and current service pack."
+        },
+        {
+          "info": {
+            "name": "Update SIM subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://iot.truphone.com/api/v2.0/sims/:iccid/subscription",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify a SIM's rate plan, applying the change immediately or at the next billing cycle."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

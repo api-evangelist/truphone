@@ -1,0 +1,461 @@
+{
+  "item": [
+    {
+      "id": "833b66c1-1cd7-464d-9725-3c40ced61c2c",
+      "name": "SIMs",
+      "description": {
+        "content": "SIM / eSIM listing, retrieval, update, and lifecycle status changes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9569d93f-4605-4f77-8083-98bdaf9d5bbb",
+          "name": "List SIM cards",
+          "request": {
+            "name": "List SIM cards",
+            "description": {
+              "content": "Retrieve a paginated list of SIM cards / eSIMs with filtering and ordering. Supports page and per_page (max 500) query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2.2",
+                "sims"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1708970-4574-42cb-a670-66670f0f94ce",
+              "name": "A paginated list of SIM cards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2.2",
+                    "sims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"iccid\": \"string\",\n      \"label\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"PRE-ACTIVE\",\n      \"organization\": \"string\"\n    },\n    {\n      \"iccid\": \"string\",\n      \"label\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"TEST\",\n      \"organization\": \"string\"\n    }\n  ],\n  \"page\": 2818,\n  \"per_page\": 2498\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70f30f18-0882-4a3b-bce5-d514f45d4e46",
+          "name": "Get a SIM card",
+          "request": {
+            "name": "Get a SIM card",
+            "description": {
+              "content": "Retrieve detailed information for a specific SIM card by ICCID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2.2",
+                "sims",
+                ":iccid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iccid",
+                  "description": "(Required) The ICCID identifying the SIM / eSIM."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f08057f9-c44f-47e1-a2e3-aee96944fcbe",
+              "name": "SIM card detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2.2",
+                    "sims",
+                    ":iccid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iccid",
+                      "description": "(Required) The ICCID identifying the SIM / eSIM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"iccid\": \"string\",\n  \"label\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"PRE-ACTIVE\",\n  \"organization\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e1c0855-8260-4938-83fc-f3dfddfa7acf",
+          "name": "Update a SIM card",
+          "request": {
+            "name": "Update a SIM card",
+            "description": {
+              "content": "Update a SIM card's label, description, or organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2.2",
+                "sims",
+                ":iccid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iccid",
+                  "description": "(Required) The ICCID identifying the SIM / eSIM."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"<string>\",\n  \"description\": \"<string>\",\n  \"organization\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8043403d-2c66-43b5-a791-d061ab1e6933",
+              "name": "Updated SIM card.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2.2",
+                    "sims",
+                    ":iccid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iccid",
+                      "description": "(Required) The ICCID identifying the SIM / eSIM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"description\": \"<string>\",\n  \"organization\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"iccid\": \"string\",\n  \"label\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"PRE-ACTIVE\",\n  \"organization\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "465c8eb7-9004-4954-8ce1-471d192e05c7",
+          "name": "Change SIM lifecycle status",
+          "request": {
+            "name": "Change SIM lifecycle status",
+            "description": {
+              "content": "Change the status of one or more SIM cards. Valid states include TEST, PROVISIONED, PRE-ACTIVE, ACTIVE, SUSPENDED, and RETIRED. Use this to activate or suspend SIMs / eSIMs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2.0",
+                "sims",
+                "change_status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sims\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d2d4920-b36a-42df-94d5-f7d6e91d1795",
+              "name": "Status change accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2.0",
+                    "sims",
+                    "change_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sims\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://iot.truphone.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "73ba26b2-0e4e-4490-b874-773095a24818",
+    "name": "Truphone (1GLOBAL) IoT Portal Connectivity SIMs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Truphone (now 1GLOBAL) IoT Portal, providing SIM / eSIM lifecycle management, connectivity and data-usage inspection, rate plans and subscriptions, and IoT device management. The API is JSON-based: request and response bodies use Content-Type application/json, each operation has a URI (for example /api/v2.2/sims) and may reference a specific resource by ICCID or ID. Truphone was acquired and rebranded to 1GLOBAL in 2022; the IoT Portal API host remains iot.truphone.com while product documentation now lives on 1global.com. eSIM ordering and activation for 1GLOBAL Connect use a separate host (services.truphone.com/connect-api); see the description on the Order operations below. Endpoints, paths, and the token authentication scheme below are documented; request/response schemas are summarized and not exhaustive.\n\nContact Support:\n Name: 1GLOBAL (Truphone) Support",
+      "type": "text/plain"
+    }
+  }
+}

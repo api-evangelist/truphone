@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truphone (1GLOBAL) IoT Portal Connectivity API",
+    "version": "2.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connectivity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get SIM status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.2/sims/:iccid/status",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ]
+          },
+          "docs": "Check a SIM card's service status and data / time limits."
+        },
+        {
+          "info": {
+            "name": "Activate or suspend data services",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://iot.truphone.com/api/v2.0/sims/change_data_status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate or suspend data services on one or more SIM cards."
+        },
+        {
+          "info": {
+            "name": "List ongoing data sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/sims/ongoing_sessions"
+          },
+          "docs": "List active data sessions, including IP and duration information."
+        },
+        {
+          "info": {
+            "name": "List call detail records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://iot.truphone.com/api/v2.0/sims/:iccid/cdr",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path",
+                "description": "The ICCID identifying the SIM / eSIM."
+              }
+            ]
+          },
+          "docs": "Retrieve call detail records (CDRs) for a SIM for usage tracking."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
