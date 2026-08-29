@@ -1,0 +1,47 @@
+slug: truphone
+provider: Truphone (1GLOBAL)
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: SIMs
+  spec_file: truphone-sims-api-openapi.yml
+  capability_id: BC-2640.20
+  capability_id_l1: BC-2640
+  capability_name: SIM & eSIM Lifecycle Management
+  confidence: 0.92
+  evidence: POST /v2.0/sims/change_status changeSimStatus Change SIM lifecycle status; 'SIM / eSIM lifecycle
+    management'
+  reason: Operations list, retrieve, update SIM cards by ICCID and change SIM lifecycle status — squarely
+    physical SIM / eSIM lifecycle management for a mobile connectivity provider.
+- tag: Connectivity
+  spec_file: truphone-connectivity-api-openapi.yml
+  capability_id: BC-2640.20
+  capability_id_l1: BC-2640
+  capability_name: SIM & eSIM Lifecycle Management
+  confidence: 0.7
+  evidence: GET /v2.2/sims/{iccid}/status  getSimStatus  Get SIM status; POST /v2.0/sims/change_data_status  changeDataStatus  Activate
+    or suspend data services; schema SimStatus
+  reason: Operations act on SIMs by ICCID to inspect status and activate/suspend data service on a mobile
+    operator's IoT portal — SIM/eSIM lifecycle control. Some ambiguity remains because 'List call detail
+    records' also touches usage mediation (BC-2660.10), so confidence is moderated.
+- tag: Plans
+  spec_file: truphone-plans-api-openapi.yml
+  capability_id: BC-2650.20
+  capability_id_l1: BC-2650
+  capability_name: Tariff & Plan Management
+  confidence: 0.7
+  evidence: GET /v2.0/rate_plans listRatePlans List rate plans; PATCH /v2.0/sims/{iccid}/subscription
+    updateSubscription Update SIM subscription
+  reason: Operations expose the connectivity rate-plan catalogue (RatePlan, RatePlanList schemas) and
+    assign/change the plan attached to a SIM subscription — telecom tariff and plan definition/lifecycle.
+    Some ambiguity with charging/rating, hence 0.7.
