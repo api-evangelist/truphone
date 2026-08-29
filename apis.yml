@@ -8,6 +8,18 @@ description: Truphone is a global eSIM, IoT, and enterprise connectivity provide
   exposes REST APIs for SIM/eSIM lifecycle management, data usage and connectivity,
   rate plans, and IoT device management across its 1GLOBAL IoT Portal, 1GLOBAL Connect,
   and the 1GLOBAL platform API.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
