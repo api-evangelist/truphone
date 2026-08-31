@@ -115,7 +115,7 @@ apis:
   humanURL: https://docs.things.1global.com/apireference/
   baseURL: https://iot.truphone.com/api
   tags:
-  - SIM
+  - SIMs
   tags_raw:
   - SIMs
   properties:
