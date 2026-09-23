@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Truphone (1GLOBAL) IoT Portal Connectivity SIMs API
-  description: 'REST API for the Truphone (now 1GLOBAL) IoT Portal, providing SIM / eSIM lifecycle management, connectivity and data-usage inspection, rate plans and subscriptions, and IoT device management. The API is JSON-based: request and response bodies use Content-Type application/json, each operation has a URI (for example /api/v2.2/sims) and may reference a specific resource by ICCID or ID. Truphone was acquired and rebranded to 1GLOBAL in 2022; the IoT Portal API host remains iot.truphone.com while product documentation now lives on 1global.com. eSIM ordering and activation for 1GLOBAL Connect use a separate host (services.truphone.com/connect-api); see the description on the Order operations below. Endpoints, paths, and the token authentication scheme below are documented; request/response schemas are summarized and not exhaustive.'
+  title: Truphone (1GLOBAL) IoT Portal SI Ms API
+  description: REST API for the Truphone (now 1GLOBAL) IoT Portal, providing SIM / eSIM lifecycle management, connectivity and data-usage inspection, rate plans and subscriptions, and IoT device management.
   termsOfService: https://www.1global.com
   contact:
     name: 1GLOBAL (Truphone) Support
@@ -104,35 +104,6 @@ components:
           type: string
         organization:
           type: string
-    SimList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Sim'
-        page:
-          type: integer
-        per_page:
-          type: integer
-    ChangeStatusRequest:
-      type: object
-      description: Request to change the status of one or more SIM cards.
-      properties:
-        sims:
-          type: array
-          items:
-            type: string
-          description: List of ICCIDs to act on.
-        status:
-          type: string
-          enum:
-          - TEST
-          - PROVISIONED
-          - PRE-ACTIVE
-          - ACTIVE
-          - SUSPENDED
-          - RETIRED
     Sim:
       type: object
       description: A SIM card / eSIM resource.
@@ -154,6 +125,35 @@ components:
           - RETIRED
         organization:
           type: string
+    ChangeStatusRequest:
+      type: object
+      description: Request to change the status of one or more SIM cards.
+      properties:
+        sims:
+          type: array
+          items:
+            type: string
+          description: List of ICCIDs to act on.
+        status:
+          type: string
+          enum:
+          - TEST
+          - PROVISIONED
+          - PRE-ACTIVE
+          - ACTIVE
+          - SUSPENDED
+          - RETIRED
+    SimList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sim'
+        page:
+          type: integer
+        per_page:
+          type: integer
   parameters:
     Iccid:
       name: iccid

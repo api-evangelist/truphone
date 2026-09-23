@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Truphone (1GLOBAL) IoT Portal Connectivity Devices API
-  description: 'REST API for the Truphone (now 1GLOBAL) IoT Portal, providing SIM / eSIM lifecycle management, connectivity and data-usage inspection, rate plans and subscriptions, and IoT device management. The API is JSON-based: request and response bodies use Content-Type application/json, each operation has a URI (for example /api/v2.2/sims) and may reference a specific resource by ICCID or ID. Truphone was acquired and rebranded to 1GLOBAL in 2022; the IoT Portal API host remains iot.truphone.com while product documentation now lives on 1global.com. eSIM ordering and activation for 1GLOBAL Connect use a separate host (services.truphone.com/connect-api); see the description on the Order operations below. Endpoints, paths, and the token authentication scheme below are documented; request/response schemas are summarized and not exhaustive.'
+  title: Truphone (1GLOBAL) IoT Portal Devices API
+  description: REST API for the Truphone (now 1GLOBAL) IoT Portal, providing SIM / eSIM lifecycle management, connectivity and data-usage inspection, rate plans and subscriptions, and IoT device management.
   termsOfService: https://www.1global.com
   contact:
     name: 1GLOBAL (Truphone) Support
