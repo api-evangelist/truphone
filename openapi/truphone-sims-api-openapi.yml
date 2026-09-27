@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Truphone (1GLOBAL) IoT Portal SI Ms API
+  title: Truphone (1GLOBAL) IoT Portal SIMs API
   description: REST API for the Truphone (now 1GLOBAL) IoT Portal, providing SIM / eSIM lifecycle management, connectivity and data-usage inspection, rate plans and subscriptions, and IoT device management.
   termsOfService: https://www.1global.com
   contact:
@@ -94,16 +94,15 @@ paths:
         '200':
           description: Status change accepted.
 components:
+  parameters:
+    Iccid:
+      name: iccid
+      in: path
+      required: true
+      description: The ICCID identifying the SIM / eSIM.
+      schema:
+        type: string
   schemas:
-    SimUpdate:
-      type: object
-      properties:
-        label:
-          type: string
-        description:
-          type: string
-        organization:
-          type: string
     Sim:
       type: object
       description: A SIM card / eSIM resource.
@@ -125,6 +124,26 @@ components:
           - RETIRED
         organization:
           type: string
+    SimUpdate:
+      type: object
+      properties:
+        label:
+          type: string
+        description:
+          type: string
+        organization:
+          type: string
+    SimList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sim'
+        page:
+          type: integer
+        per_page:
+          type: integer
     ChangeStatusRequest:
       type: object
       description: Request to change the status of one or more SIM cards.
@@ -143,25 +162,6 @@ components:
           - ACTIVE
           - SUSPENDED
           - RETIRED
-    SimList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Sim'
-        page:
-          type: integer
-        per_page:
-          type: integer
-  parameters:
-    Iccid:
-      name: iccid
-      in: path
-      required: true
-      description: The ICCID identifying the SIM / eSIM.
-      schema:
-        type: string
   securitySchemes:
     TokenAuth:
       type: apiKey
