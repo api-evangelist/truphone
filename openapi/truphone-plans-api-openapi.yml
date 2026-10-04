@@ -81,13 +81,6 @@ paths:
           description: Updated subscription.
 components:
   schemas:
-    RatePlanList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/RatePlan'
     RatePlan:
       type: object
       properties:
@@ -97,6 +90,13 @@ components:
           type: string
         description:
           type: string
+    RatePlanList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RatePlan'
   parameters:
     Iccid:
       name: iccid

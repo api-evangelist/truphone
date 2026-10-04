@@ -80,6 +80,17 @@ components:
       schema:
         type: string
   schemas:
+    SimStatus:
+      type: object
+      properties:
+        iccid:
+          type: string
+        service_status:
+          type: string
+        data_limit:
+          type: string
+        time_limit:
+          type: string
     ChangeStatusRequest:
       type: object
       description: Request to change the status of one or more SIM cards.
@@ -98,17 +109,6 @@ components:
           - ACTIVE
           - SUSPENDED
           - RETIRED
-    SimStatus:
-      type: object
-      properties:
-        iccid:
-          type: string
-        service_status:
-          type: string
-        data_limit:
-          type: string
-        time_limit:
-          type: string
   securitySchemes:
     TokenAuth:
       type: apiKey
