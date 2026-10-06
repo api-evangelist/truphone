@@ -50,7 +50,7 @@ tags_raw:
 - Telecom
 - Mobile Network
 created: '2026-06-21'
-modified: '2026-06-21'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: truphone:truphone-connectivity-api
@@ -136,6 +136,8 @@ apis:
   - type: Plans
     url: plans/truphone-plans-pricing.yml
 common:
+- url: https://www.1global.com/press
+  type: Blog
 - type: CapabilityMap
   url: capabilities/truphone-capability-edges.yml
   name: Truphone (1GLOBAL) Business Capability Map
