@@ -127,3 +127,45 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  - prepaid
+  units:
+  - transaction
+  plans:
+  - name: SmartEnterprise (Prepaid)
+    access: other
+    model: prepaid
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
+  - name: Enterprise (Postpaid)
+    access: enterprise
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: IoT Connectivity
+    access: enterprise
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: 1GLOBAL Connect
+    access: enterprise
+    model: metered
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - per-use
