@@ -80,6 +80,14 @@ paths:
         '200':
           description: Updated subscription.
 components:
+  parameters:
+    Iccid:
+      name: iccid
+      in: path
+      required: true
+      description: The ICCID identifying the SIM / eSIM.
+      schema:
+        type: string
   schemas:
     RatePlan:
       type: object
@@ -97,14 +105,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RatePlan'
-  parameters:
-    Iccid:
-      name: iccid
-      in: path
-      required: true
-      description: The ICCID identifying the SIM / eSIM.
-      schema:
-        type: string
   securitySchemes:
     TokenAuth:
       type: apiKey

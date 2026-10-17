@@ -94,45 +94,7 @@ paths:
         '200':
           description: Status change accepted.
 components:
-  parameters:
-    Iccid:
-      name: iccid
-      in: path
-      required: true
-      description: The ICCID identifying the SIM / eSIM.
-      schema:
-        type: string
   schemas:
-    SimUpdate:
-      type: object
-      properties:
-        label:
-          type: string
-        description:
-          type: string
-        organization:
-          type: string
-    Sim:
-      type: object
-      description: A SIM card / eSIM resource.
-      properties:
-        iccid:
-          type: string
-        label:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
-          enum:
-          - TEST
-          - PROVISIONED
-          - PRE-ACTIVE
-          - ACTIVE
-          - SUSPENDED
-          - RETIRED
-        organization:
-          type: string
     ChangeStatusRequest:
       type: object
       description: Request to change the status of one or more SIM cards.
@@ -162,6 +124,44 @@ components:
           type: integer
         per_page:
           type: integer
+    Sim:
+      type: object
+      description: A SIM card / eSIM resource.
+      properties:
+        iccid:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - TEST
+          - PROVISIONED
+          - PRE-ACTIVE
+          - ACTIVE
+          - SUSPENDED
+          - RETIRED
+        organization:
+          type: string
+    SimUpdate:
+      type: object
+      properties:
+        label:
+          type: string
+        description:
+          type: string
+        organization:
+          type: string
+  parameters:
+    Iccid:
+      name: iccid
+      in: path
+      required: true
+      description: The ICCID identifying the SIM / eSIM.
+      schema:
+        type: string
   securitySchemes:
     TokenAuth:
       type: apiKey

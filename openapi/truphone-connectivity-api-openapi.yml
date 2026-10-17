@@ -71,14 +71,6 @@ paths:
         '200':
           description: A list of call detail records.
 components:
-  parameters:
-    Iccid:
-      name: iccid
-      in: path
-      required: true
-      description: The ICCID identifying the SIM / eSIM.
-      schema:
-        type: string
   schemas:
     SimStatus:
       type: object
@@ -109,6 +101,14 @@ components:
           - ACTIVE
           - SUSPENDED
           - RETIRED
+  parameters:
+    Iccid:
+      name: iccid
+      in: path
+      required: true
+      description: The ICCID identifying the SIM / eSIM.
+      schema:
+        type: string
   securitySchemes:
     TokenAuth:
       type: apiKey
