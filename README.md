@@ -1,4 +1,4 @@
-# Truphone (1GLOBAL) (truphone)
+# Truphone (1GLOBAL)
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,125 +66,124 @@
 
 Truphone is a global eSIM, IoT, and enterprise connectivity provider now operating as 1GLOBAL after its 2022 acquisition. It runs its own global mobile network supplemented by roaming across 600+ partner networks in 190+ countries, and exposes REST APIs for SIM/eSIM lifecycle management, data usage and connectivity, rate plans, and IoT device management across its 1GLOBAL IoT Portal, 1GLOBAL Connect, and the 1GLOBAL platform API.
 
-> Rebrand note: Truphone was acquired in 2022 and rebranded to **1GLOBAL**. Product and documentation now live on 1global.com, while several API hosts and GitHub repositories still use the legacy `truphone.com` / `Truphone` namespaces (e.g. `iot.truphone.com`, `services.truphone.com`, `github.com/Truphone`).
+**Areas:** eSIM · IoT · Connectivity · SIM Management · Telecommunications · Mobile Network
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/truphone/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/truphone/refs/heads/main/apis.yml)
+## Truphone (1GLOBAL) on APIs.io
 
-## Tags
+Everything profiled for Truphone (1GLOBAL) is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/truphone/](https://apis.io/providers/truphone/)** — or go straight to one of the APIs or properties below.
 
-- eSIM
-- IoT
-- Connectivity
-- SIM Management
-- Telecom
-- Mobile Network
+### APIs (5)
 
-## Timestamps
+- [Truphone (1GLOBAL) Connectivity API](https://apis.io/apis/truphone/truphone-connectivity-api/) — Data sessions, call detail records, status, and location updates.
+- [Truphone (1GLOBAL) Devices API](https://apis.io/apis/truphone/truphone-devices-api/) — Connected device management and automation rules.
+- [Truphone (1GLOBAL) Organization API](https://apis.io/apis/truphone/truphone-organization-api/) — Tags and custom attributes for organizing SIM fleets.
+- [Truphone (1GLOBAL) Plans API](https://apis.io/apis/truphone/truphone-plans-api/) — Rate plans and SIM subscriptions.
+- [Truphone (1GLOBAL) SI Ms API](https://apis.io/apis/truphone/truphone-sims-api/) — SIM / eSIM listing, retrieval, update, and lifecycle status changes.
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Truphone (1GLOBAL) SIMs / eSIMs API
+#### Agentic access (1)
 
-List, retrieve, update, and change the status of SIM cards and eSIMs (TEST, PROVISIONED, PRE-ACTIVE, ACTIVE, SUSPENDED, RETIRED) and activate or suspend data services across the 1GLOBAL IoT Portal. eSIM ordering and activation are also available through 1GLOBAL Connect via POST /connect-api/v2/orders.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://docs.things.1global.com/apireference/](https://docs.things.1global.com/apireference/)
-- **Base URL:** `https://iot.truphone.com/api`
+- [Truphone Agentic Access](https://apis.io/agentic-access/truphone/truphone-agentic-access/)
 
-#### Tags
+#### Collections (6)
 
-- SIM
-- eSIM
-- Lifecycle
-- Provisioning
+Postman and Open Collection request collections.
 
-#### Properties
+- [Truphone (1GLOBAL) IoT Portal API](https://apis.io/collections/truphone/open-truphone/)
+- [Truphone (1GLOBAL) IoT Portal Connectivity API](https://apis.io/collections/truphone/open-truphone-connectivity-api/)
+- [Truphone (1GLOBAL) IoT Portal Connectivity Devices API](https://apis.io/collections/truphone/open-truphone-devices-api/)
+- [Truphone (1GLOBAL) IoT Portal Connectivity Organization API](https://apis.io/collections/truphone/open-truphone-organization-api/)
+- [Truphone (1GLOBAL) IoT Portal Connectivity Plans API](https://apis.io/collections/truphone/open-truphone-plans-api/)
+- [Truphone (1GLOBAL) IoT Portal Connectivity SIMs API](https://apis.io/collections/truphone/open-truphone-sims-api/)
 
-- [Documentation](https://docs.things.1global.com/apireference/)
-- [API Reference](https://docs.things.1global.com/apireference/)
-- [OpenAPI](openapi/truphone-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/truphone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/truphone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (2)
 
-### Truphone (1GLOBAL) Connectivity / Usage API
+Authentication, trust centre, and vulnerability disclosure.
 
-Inspect ongoing data sessions, retrieve call detail records (CDRs) for usage tracking, check SIM service status with data/time limits, and review location updates for connected SIMs.
+- [Truphone Authentication](https://apis.io/security/truphone/truphone-authentication/)
+- [Truphone Domain Security](https://apis.io/security/truphone/truphone-domain-security/)
 
-- **Human URL:** [https://docs.things.1global.com/apireference/](https://docs.things.1global.com/apireference/)
-- **Base URL:** `https://iot.truphone.com/api`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Connectivity
-- Usage
-- Data Sessions
-- CDR
+- [Truphone Plans Pricing](https://apis.io/plans/truphone/truphone-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://docs.things.1global.com/apireference/)
-- [API Reference](https://docs.things.1global.com/apireference/)
-- [OpenAPI](openapi/truphone-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/truphone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/truphone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### Truphone (1GLOBAL) Plans API
+- [Truphone Rate Limits](https://apis.io/rate-limits/truphone/truphone-rate-limits/)
 
-List available rate plans, retrieve plan detail, and read or modify a SIM's subscription and current service pack with immediate or next-billing-cycle application.
+#### FinOps (1)
 
-- **Human URL:** [https://docs.things.1global.com/apireference/](https://docs.things.1global.com/apireference/)
-- **Base URL:** `https://iot.truphone.com/api`
+What the API costs to run, by operation.
 
-#### Tags
+- [Truphone Finops](https://apis.io/finops/truphone/truphone-finops/)
 
-- Plans
-- Rate Plans
-- Subscriptions
+## Where to find this API
 
-#### Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [Documentation](https://docs.things.1global.com/apireference/)
-- [API Reference](https://docs.things.1global.com/apireference/)
-- [OpenAPI](openapi/truphone-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Plans](plans/truphone-plans-pricing.yml)
-- [Postman Collection](collections/truphone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/truphone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Truphone (1GLOBAL) Device Management API
-
-List and configure connected devices, manage event-based and usage-based automation rules, and organize fleets with tags and custom attributes across the 1GLOBAL IoT Portal.
-
-- **Human URL:** [https://docs.things.1global.com/apireference/](https://docs.things.1global.com/apireference/)
-- **Base URL:** `https://iot.truphone.com/api`
-
-#### Tags
-
-- Devices
-- Device Management
-- Rules
-- Automation
-
-#### Properties
-
-- [Documentation](https://docs.things.1global.com/apireference/)
-- [API Reference](https://docs.things.1global.com/apireference/)
-- [OpenAPI](openapi/truphone-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/truphone.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/truphone.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/Truphone)
-- [LinkedIn](https://www.linkedin.com/company/1global)
 - [Website](https://www.1global.com)
 - [Documentation](https://docs.1global.com)
-- [Plans](plans/truphone-plans-pricing.yml)
-- [Rate Limits](rate-limits/truphone-rate-limits.yml)
-- [Fin Ops](finops/truphone-finops.yml)
+- [Blog](https://www.1global.com/press)
+- [GitHub](https://github.com/Truphone)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 25.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 47.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.0** — Telecommunications
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/truphone/](https://apis.io/providers/truphone/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Truphone (1GLOBAL): the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/truphone/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
